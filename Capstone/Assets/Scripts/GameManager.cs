@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playButton.onClick.AddListener(PlayGame);
-        settingsButton.onClick.AddListener(AudioSettings);
+        //settingsButton.onClick.AddListener(AudioSettings);
         quitButton.onClick.AddListener(QuitGame);
     }
 
@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
 
     public void AudioSettings()
     {
-        Debug.Log("Audio settings button clicked");
+        // Debug.Log("Audio settings button clicked");
+        // Called from the OnClick event of the Audio Settings button in the UI
     }
 
     public void QuitGame()
