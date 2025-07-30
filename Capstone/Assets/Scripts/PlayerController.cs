@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.linearVelocity = new Vector2(xAxis * walkSpeed, rb.linearVelocity.y);
-        //anim.SetBool("Walking", rb.linearVelocity.x != 0 && IsGrounded());
+        anim.SetBool("Walking", rb.linearVelocity.x != 0 && IsGrounded());
     }
 
     void StartDash()
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         pState.dashing = true;
-        //anim.SetTrigger("Dashing");
+        anim.SetTrigger("Dashing");
         rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         if (IsGrounded()) Instantiate(dashEffect, transform);
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //anim.SetBool("Jumping", !IsGrounded());
+        anim.SetBool("Jumping", !IsGrounded());
     }
 
     private void UpdateJumpVariables()
