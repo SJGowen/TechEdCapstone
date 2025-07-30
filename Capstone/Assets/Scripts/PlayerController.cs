@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -30,14 +29,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
     [SerializeField] private GameObject dashEffect;
+    private bool canDash = true;
+    private bool dashed;
+    [Space(5)]
+
+    [Header("Attack Settings:")]
+    [SerializeField] private float timeBetweenAttack;
+    [SerializeField] private float timeSinceAttack;
+    [SerializeField] private Transform SideAttackTransform;
+    [SerializeField] private Transform UpAttackTransform;
+    [SerializeField] private Transform DownAttackTransform;
+    [SerializeField] private Vector2 SideAttackArea;
+    [SerializeField] private Vector2 UpAttackArea;
+    [SerializeField] private Vector2 DownAttackArea;
+    [SerializeField] private LayerMask attackableLayer;
+    [SerializeField] private float damage;
+    private bool attack;
     [Space(5)]
 
     private PlayerStateList pState;
     private Rigidbody2D rb;
     private float xAxis;
+    private float yAxis;
     private float gravity;
-    private bool canDash;
-    private bool dashed;
     private Animator anim;
 
     public static PlayerController Instance;
@@ -63,6 +77,14 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
+        Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
+        Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
+    }
+
     void Update()
     {
         GetInputs();
@@ -76,11 +98,14 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         StartDash();
+        Attack();
     }
 
     void GetInputs()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        attack = Input.GetMouseButtonDown(0);
     }
 
     void Flip()
@@ -98,7 +123,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.linearVelocity = new Vector2(xAxis * walkSpeed, rb.linearVelocity.y);
-        //anim.SetBool("Walking", rb.linearVelocity.x != 0 && IsGrounded());
+        anim.SetBool("Walking", rb.linearVelocity.x != 0 && Grounded());
     }
 
     void StartDash()
@@ -109,7 +134,7 @@ public class PlayerController : MonoBehaviour
             dashed = true;
         }
 
-        if (IsGrounded())
+        if (Grounded())
         {
             dashed = false;
         }
@@ -119,17 +144,58 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         pState.dashing = true;
-        //anim.SetTrigger("Dashing");
+        anim.SetTrigger("Dashing");
         rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
-        if (IsGrounded()) Instantiate(dashEffect, transform);
+        if (Grounded()) Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = gravity;
+        pState.dashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
-    public bool IsGrounded()
+    void Attack()
+    {
+        timeSinceAttack += Time.deltaTime;
+
+        if (attack && timeSinceAttack >= timeBetweenAttack)
+        {
+            timeSinceAttack = 0f;
+            anim.SetTrigger("Attacking");
+
+            if (yAxis <= 0 && Grounded())
+            {
+                Hit(SideAttackTransform, SideAttackArea);
+            }
+            else if (yAxis > 0)
+            {
+                Hit(UpAttackTransform, UpAttackArea);
+            }
+            else if (yAxis < 0 && !Grounded())
+            {
+                Hit(DownAttackTransform, DownAttackArea);
+            }
+        }
+    }
+
+    void Hit(Transform attackTransform, Vector2 attackArea)
+    {
+        Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(attackTransform.position, attackArea, 0f, attackableLayer);
+
+        if (objectsToHit.Length > 0)
+        {
+            foreach (Collider2D collider in objectsToHit)
+            {
+                //if (collider.GetComponent<Enemy>() != null)
+                //{
+                //    collider.GetComponent<Enemy>().EnemyHit(damage);
+                //}
+            }
+        }
+    }
+
+    public bool Grounded()
     {
         return (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) ||
             Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround) ||
@@ -151,7 +217,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 pState.jumping = true;
             }
-            else if (!IsGrounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
+            else if (!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
             {
                 pState.jumping = true;
                 airJumpCounter++;
@@ -159,12 +225,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //anim.SetBool("Jumping", !IsGrounded());
+        anim.SetBool("Jumping", !Grounded());
     }
 
     private void UpdateJumpVariables()
     {
-        if (IsGrounded())
+        if (Grounded())
         {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
