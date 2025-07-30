@@ -212,7 +212,11 @@ public class PlayerController : MonoBehaviour
 
             if (enemy && !hitEnemies.Contains(enemy))
             {
-                hitEnemies.Add(enemy);
+                if (collider.GetComponent<EnemyAI>() != null)
+                {
+                   collider.GetComponent<EnemyAI>().EnemyHit(damage, (transform.position - collider.transform.position).normalized, recoilStrength);
+                   hitEnemies.Add(enemy);
+                }
             }
         }
 
