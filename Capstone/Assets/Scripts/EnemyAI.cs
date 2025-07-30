@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     // [SerialzeField] protected PlayerController player; 
     [SerializeField] protected float _enemySpeed; //Enemy's Speed
-
+    [SerializeField] protected float _damage; // Damage that enemy does to player
 
     protected float _enemyRecoilTimer; // How long the enemy is recoilling for
     protected Rigidbody2D _enemyRigidBody; //Enemy RigidBody
@@ -55,10 +55,23 @@ public class EnemyAI : MonoBehaviour
         if (!_enemyIsRecoilling)
         {
             _enemyRigidBody.AddForce(-_hitForce * _enemyRecoilFactor * _hitDirection);
-            // Force from player hit moves that enemy to new position in relation to the hitforce, hit direction and that enemy's recoil factor 
+            // Force from player hit moves that enemy to new position in relation to the hitforce, hit direction and that enemy's recoil factor
+            _enemyIsRecoilling = true;
         }
     }
 
+    protected void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        {
+            Attack();
+        }
+    }
+
+    protected virtual void Attack()
+    {
+        PlayerController.Instance.TakeDamage(_damage);
+    }
 } 
 
 /*
