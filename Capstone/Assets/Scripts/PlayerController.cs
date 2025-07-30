@@ -187,10 +187,10 @@ public class PlayerController : MonoBehaviour
         {
             foreach (Collider2D collider in objectsToHit)
             {
-                //if (collider.GetComponent<Enemy>() != null)
-                //{
-                //    collider.GetComponent<Enemy>().EnemyHit(damage);
-                //}
+                if (collider.GetComponent<EnemyAI>() != null)
+                {
+                   collider.GetComponent<EnemyAI>().EnemyHit(damage, (transform.position - collider.transform.position).normalized, 100);
+                }
             }
         }
     }
