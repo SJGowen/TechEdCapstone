@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,10 +71,11 @@ public class PlayerController : MonoBehaviour
     private float xAxis;
     private float yAxis;
     private bool attack = false;
-
-    public static PlayerController Instance;
     private bool restoreTime;
     private float restoreTimeSpeed;
+    private bool canFlash = true;
+
+    public static PlayerController Instance;
 
     public int Health
     {
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -103,8 +103,6 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Health = maxHealth;
     }
 
     void Start()
@@ -114,6 +112,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         gravity = rb.gravityScale;
+        Health = maxHealth;
     }
 
     private void OnDrawGizmos()
@@ -126,11 +125,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (pState.cutscene) return;
+
         GetInputs();
         UpdateJumpVariables();
+        RestoreTimeScale();
 
         if (pState.dashing) return;
-        RestoreTimeScale();
         FlashWhileInvincible();
         Move();
 
@@ -142,7 +143,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pState.dashing) return;
+        if (pState.dashing || pState.cutscene) return;
+
         Recoil();
     }
 
@@ -202,6 +204,25 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
+    public IEnumerator WalkIntoNewScene(Vector2 exitDir, float delay)
+    {
+        if (exitDir.y > 0)
+        {
+            rb.linearVelocity = jumpForce * exitDir;
+        }
+
+        if (exitDir.x != 0)
+        {
+            xAxis = exitDir.x > 0 ? 1 : -1;
+
+            Move();
+        }
+
+        Flip();
+        yield return new WaitForSeconds(delay);
+        pState.cutscene = false;
+    }
+
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
@@ -213,23 +234,24 @@ public class PlayerController : MonoBehaviour
 
             if (yAxis <= 0 && Grounded())
             {
-                pState.recoilingX = Hit(SideAttackTransform, SideAttackArea, recoilXSpeed);
+                int recoilDirection = pState.lookingRight ? 1 : -1;
+                pState.recoilingX = Hit(SideAttackTransform, SideAttackArea, Vector2.right * recoilDirection, recoilXSpeed);
                 Instantiate(slashEffect, SideAttackTransform);
             }
             else if (yAxis > 0)
             {
-                pState.recoilingY = Hit(UpAttackTransform, UpAttackArea, recoilYSpeed);
+                pState.recoilingY = Hit(UpAttackTransform, UpAttackArea, Vector2.up, recoilYSpeed);
                 SlashEffectAngle(slashEffect, 80, UpAttackTransform);
             }
             else if (yAxis < 0 && !Grounded())
             {
-                pState.recoilingY = Hit(DownAttackTransform, DownAttackArea, recoilYSpeed);
+                pState.recoilingY = Hit(DownAttackTransform, DownAttackArea, Vector2.down, recoilYSpeed);
                 SlashEffectAngle(slashEffect, -90, DownAttackTransform);
             }
         }
     }
 
-    bool Hit(Transform attackTransform, Vector2 attackArea, float recoilStrength)
+    bool Hit(Transform attackTransform, Vector2 attackArea, Vector2 recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(attackTransform.position, attackArea, 0f, attackableLayer);
         List<EnemyAI> hitEnemies = new List<EnemyAI>();
@@ -242,7 +264,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (collider.GetComponent<EnemyAI>() != null)
                 {
-                    collider.GetComponent<EnemyAI>().EnemyHit(damage, (transform.position - collider.transform.position).normalized, recoilStrength);
+                    collider.GetComponent<EnemyAI>().EnemyHit(damage, recoilDir, recoilStrength);
                     hitEnemies.Add(enemy);
                 }
             }
@@ -341,9 +363,27 @@ public class PlayerController : MonoBehaviour
         pState.invincible = false;
     }
 
+    IEnumerator Flash()
+    {
+        sr.enabled = !sr.enabled;
+        canFlash = false;
+        yield return new WaitForSeconds(0.1f);
+        canFlash = true;
+    }
+
     void FlashWhileInvincible()
     {
-        sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
+        if (pState.invincible)
+        {
+            if (Time.timeScale > 0.2f && canFlash)
+            {
+                StartCoroutine(Flash());
+            }
+        }
+        else
+        {
+            sr.enabled = true;
+        }
     }
 
     void RestoreTimeScale()
@@ -393,25 +433,22 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (!pState.jumping)
+        if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && !pState.jumping)
         {
-            if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                pState.jumping = true;
-            }
-            else if (!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
-            {
-                pState.jumping = true;
-                airJumpCounter++;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            pState.jumping = true;
+        }
+        else if (!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
+        {
+            pState.jumping = true;
+            airJumpCounter++;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0)
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 3)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             pState.jumping = false;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         }
 
         anim.SetBool("Jumping", !Grounded());

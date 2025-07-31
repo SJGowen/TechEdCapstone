@@ -772,7 +772,7 @@ MonoBehaviour:
   recoilXSteps: 5
   recoilYSteps: 5
   recoilXSpeed: 100
-  recoilYSpeed: 100
+  recoilYSpeed: 32
   health: 0
   maxHealth: 10
   hitFlashSpeed: 0.5
@@ -795,6 +795,7 @@ MonoBehaviour:
   recoilingY: 0
   lookingRight: 0
   invincible: 0
+  cutscene: 0
 --- !u!95 &1079257706
 Animator:
   serializedVersion: 7
