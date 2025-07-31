@@ -8,18 +8,18 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected float _enemyRecoilFactor; // Strength of the recoil when enemy takes damage
     [SerializeField] protected bool _enemyIsRecoilling = false; // whether the enemy is recoiling or not
 
-    // [SerialzeField] protected PlayerController player; 
+    [SerializeField] protected PlayerController player; // PlayerControllerscript.cs
     [SerializeField] protected float _enemySpeed; //Enemy's Speed
     [SerializeField] protected float _damage; // Damage that enemy does to player
 
     protected float _enemyRecoilTimer; // How long the enemy is recoilling for
-    protected Rigidbody2D _enemyRigidBody; //Enemy RigidBody
+    protected Rigidbody2D _enemyRigidBody; // Enemy RigidBody
 
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         _enemyRigidBody = GetComponent<Rigidbody2D>(); // Getting that enemy's Rigidbody
-        // player = PlayerController.Instance; // referencing the Playercontroller script
+        player = PlayerController.Instance; // PlayerControllerScript is referenced as "player" in this script and its children
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    public virtual void Update()
+    protected virtual void Update()
     {
         if (_enemyHealth <= 0) // That Enemy has no health left
         {
@@ -60,38 +60,19 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D other)
+    protected void OnColliderStay2D(Collider2D collision)
     {
-        if (other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (collision.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             Attack();
+            //PlayerController.Instance.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
         }
     }
 
     protected virtual void Attack()
     {
-        PlayerController.Instance.TakeDamage(_damage);
+        PlayerController.Instance.TakeDamage(_damage); // Deals varying damage to the player
     }
 } 
 
-/*
-//FOR THE PLAYER CONTROLLER
 
-void Hit(Transform _attackTransform, Vector2 _attackArea) // this is to reference the player hitting an enemy
-{
-    Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
-
-    if(objectsToHit.Length > 0)
-    { 
-        Debug.Log("Hit");
-    }
-    for(int i = 0; i < objectsToHit.Length; i++) 
-    // before: set i(index) to zero, condition: loop starts if "i" is less than number of enteries in the ObjectsToHit.Length array; after: "i" is added to if condition hasn't been met
-    {
-        if(objectsToHit[i].getComponent<Enemy>() != null)
-        {
-            objectsToHit[i].GetComponent<Enemy>().EnemyHit(dammage, (transform.position - objectsToHit[i].transform.position).normalized, 100);
-            // Determines the direction of the player's hit, "100" is the hit force value
-        }
-    }
-}*/

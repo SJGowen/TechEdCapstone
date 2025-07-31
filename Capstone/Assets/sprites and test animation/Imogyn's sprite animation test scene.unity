@@ -619,7 +619,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumping: 0
   dashing: 0
-  attacking: 0
+  recoilingX: 0
+  recoilingY: 0
+  lookingRight: 0
+  invincible: 0
 --- !u!114 &587747709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,8 +650,6 @@ MonoBehaviour:
   dashTime: 0.2
   dashCooldown: 0.35
   dashEffect: {fileID: 1286190405076046796, guid: 060088d8927034840bdbf7d2e65c36f6, type: 3}
-  timeBetweenAttack: 1
-  timeSinceAttack: 1.5
   SideAttackTransform: {fileID: 856915266}
   UpAttackTransform: {fileID: 913020370}
   DownAttackTransform: {fileID: 617419576}
@@ -658,7 +659,16 @@ MonoBehaviour:
   attackableLayer:
     serializedVersion: 2
     m_Bits: 0
+  timeBetweenAttack: 1
   damage: 2
+  slashEffect: {fileID: 0}
+  recoilXSteps: 5
+  recoilYSteps: 5
+  recoilXSpeed: 100
+  recoilYSpeed: 100
+  health: 0
+  maxHealth: 0
+  pState: {fileID: 0}
 --- !u!50 &587747710
 Rigidbody2D:
   serializedVersion: 5
@@ -1529,7 +1539,9 @@ MonoBehaviour:
   _enemyRecoilLength: 0.5
   _enemyRecoilFactor: 0
   _enemyIsRecoilling: 0
+  player: {fileID: 0}
   _enemySpeed: 0
+  _damage: 0
 --- !u!1 &1391557080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1671,7 @@ GameObject:
   - component: {fileID: 1881864299}
   - component: {fileID: 1881864300}
   - component: {fileID: 1881864301}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Raised_Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
