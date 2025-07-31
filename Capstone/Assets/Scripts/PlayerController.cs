@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool Hit(Transform attackTransform, Vector2 attackArea, float recoilStength)
+    bool Hit(Transform attackTransform, Vector2 attackArea, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(attackTransform.position, attackArea, 0f, attackableLayer);
         List<EnemyAI> hitEnemies = new List<EnemyAI>();
