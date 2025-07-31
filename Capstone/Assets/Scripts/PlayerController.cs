@@ -62,16 +62,35 @@ public class PlayerController : MonoBehaviour
     [Header("Health Settings:")]
     public int health;
     public int maxHealth;
+    [SerializeField] float hitFlashSpeed;
     [Space(5)]
 
     [HideInInspector] public PlayerStateList pState;
     private Animator anim;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     private float xAxis;
     private float yAxis;
     private bool attack = false;
 
     public static PlayerController Instance;
+    private bool restoreTime;
+    private float restoreTimeSpeed;
+
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            if (health != value)
+            {
+                health = Mathf.Clamp(value, 0, maxHealth);
+            }
+        }
+    }
 
     void Awake()
     {
@@ -85,13 +104,14 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        health = maxHealth;
+        Health = maxHealth;
     }
 
     void Start()
     {
         pState = GetComponent<PlayerStateList>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         gravity = rb.gravityScale;
     }
@@ -110,11 +130,19 @@ public class PlayerController : MonoBehaviour
         UpdateJumpVariables();
 
         if (pState.dashing) return;
-        Flip();
+        RestoreTimeScale();
+        FlashWhileInvincible();
         Move();
+
+        Flip();
         Jump();
         StartDash();
         Attack();
+    }
+
+    private void FixedUpdate()
+    {
+        if (pState.dashing) return;
         Recoil();
     }
 
@@ -122,7 +150,7 @@ public class PlayerController : MonoBehaviour
     {
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
-        attack = Input.GetMouseButtonDown(0);
+        attack = Input.GetButtonDown("Attack");
     }
 
     void Flip()
@@ -214,8 +242,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (collider.GetComponent<EnemyAI>() != null)
                 {
-                   collider.GetComponent<EnemyAI>().EnemyHit(damage, (transform.position - collider.transform.position).normalized, recoilStrength);
-                   hitEnemies.Add(enemy);
+                    collider.GetComponent<EnemyAI>().EnemyHit(damage, (transform.position - collider.transform.position).normalized, recoilStrength);
+                    hitEnemies.Add(enemy);
                 }
             }
         }
@@ -301,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= Mathf.RoundToInt(damage);
+        Health -= Mathf.RoundToInt(damage);
         StartCoroutine(StopTakingDamage());
     }
 
@@ -309,9 +337,51 @@ public class PlayerController : MonoBehaviour
     {
         pState.invincible = true;
         anim.SetTrigger("TakeDamage");
-        health = Mathf.Clamp(health, 0, maxHealth);
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
+    }
+
+    void FlashWhileInvincible()
+    {
+        sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
+    }
+
+    void RestoreTimeScale()
+    {
+        if (restoreTime)
+        {
+            if (Time.timeScale < 1f)
+            {
+                Time.timeScale += Time.unscaledDeltaTime * restoreTimeSpeed;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                restoreTime = false;
+            }
+        }
+    }
+
+    public void HitStopTime(float newTimeScale, float restoreSpeed, float delay)
+    {
+        restoreTimeSpeed = restoreSpeed;
+        Time.timeScale = newTimeScale;
+
+        if (delay > 0)
+        {
+            StopCoroutine(StartTimeAgain(delay));
+            StartCoroutine(StartTimeAgain(delay));
+        }
+        else
+        {
+            restoreTime = true;
+        }
+    }
+
+    IEnumerator StartTimeAgain(float delay)
+    {
+        restoreTime = true;
+        yield return new WaitForSecondsRealtime(delay);
     }
 
     public bool Grounded()
