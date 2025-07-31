@@ -60,11 +60,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D other)
+    protected void OnCollisionStay2D(Collision2D collision)
     {
-        if (other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (collision.collider.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             Attack();
+            PlayerController.Instance.HitStopTime(0, 2, 0.2f);
         }
     }
 
