@@ -398,4 +398,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(_delay);
         pState.cutscene = false;
     }
+
 }
