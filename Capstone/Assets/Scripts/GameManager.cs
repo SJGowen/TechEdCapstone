@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
 
+    public string transitionedFromScene;
+
     void Start()
     {
         playButton.onClick.AddListener(PlayGame);
@@ -43,5 +45,19 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public static GameManager Instance { get; private set; }
+    private void Awake()
+    {
+     if(Instance != null && Instance !=this)
+        {
+            Destroy(gameObject);
+        }
+     else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 }

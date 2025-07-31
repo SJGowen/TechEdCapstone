@@ -73,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
+    
+
+
     void Awake()
     {
         if (Instance == null)
@@ -106,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (pState.cutscene) return;
+
         GetInputs();
         UpdateJumpVariables();
 
@@ -371,5 +376,26 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter -= Mathf.RoundToInt(Time.deltaTime * 10);
         }
+    }
+
+    public IEnumerator WalkIntoNewScene(Vector2 _exitDir, float _delay)
+    {
+        //If exit direction is upwards
+        if (_exitDir.y > 0)
+        {
+            rb.velocity = jumpForce * _exitDir;
+        }
+
+        //If exit direction requires horizontal movement
+        if(_exitDir.x != 0)
+        {
+            xAxis = _exitDir.x > 0 ? 1 : -1;
+
+            Move();
+        }
+
+        Flip();
+        yield return new WaitForSeconds(_delay);
+        pState.cutscene = false;
     }
 }
