@@ -56,23 +56,25 @@ public class EnemyAI : MonoBehaviour
         {
             _enemyRigidBody.AddForce(-_hitForce * _enemyRecoilFactor * _hitDirection);
             // Force from player hit moves that enemy to new position in relation to the hitforce, hit direction and that enemy's recoil factor
-            _enemyIsRecoilling = true;
+            _enemyIsRecoilling = true; // Set Enemy recoilling state to true
         }
     }
 
-    protected void OnColliderStay2D(Collider2D collision)
+    protected void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (collision.collider.CompareTag("Player") && !player.pState.invincible)
         {
             Attack();
             //PlayerController.Instance.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
+           
         }
     }
 
     protected virtual void Attack()
     {
-        PlayerController.Instance.TakeDamage(_damage); // Deals varying damage to the player
+        player.TakeDamage(_damage); // Deals varying damage to the player
     }
 } 
+
 
 
