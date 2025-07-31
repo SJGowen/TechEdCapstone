@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         if (collision.collider.CompareTag("Player") && !player.pState.invincible)
         {
             Attack();
-            //PlayerController.Instance.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
+            PlayerController.Instance.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
            
         }
     }
