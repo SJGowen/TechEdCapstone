@@ -21,6 +21,8 @@ public class SceneTransition : MonoBehaviour
         {
             GameManager.Instance.transitionedFromScene = SceneManager.GetActiveScene().name;
 
+            PlayerController.Instance.pState.cutscene = true;
+
             SceneManager.LoadScene(transitionTo);
         }
     }
@@ -31,6 +33,7 @@ public class SceneTransition : MonoBehaviour
         {
             PlayerController.Instance.transform.position = startPoint.position;
 
+            StartCoroutine(PlayerController.Instance.WalkIntoNewScene(exitDirection, exitTime));
         }
     }
 }
