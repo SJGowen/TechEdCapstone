@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float timeBetweenAttack;
     private float timeSinceAttack;
     [SerializeField] private float damage;
-    [SerializeField] private GameObject slashEffect;
     [Space(5)]
 
     [Header("Attack Settings:")]
@@ -236,17 +235,14 @@ public class PlayerController : MonoBehaviour
             {
                 int recoilDirection = pState.lookingRight ? 1 : -1;
                 pState.recoilingX = Hit(SideAttackTransform, SideAttackArea, Vector2.right * recoilDirection, recoilXSpeed);
-                Instantiate(slashEffect, SideAttackTransform);
             }
             else if (yAxis > 0)
             {
                 pState.recoilingY = Hit(UpAttackTransform, UpAttackArea, Vector2.up, recoilYSpeed);
-                SlashEffectAngle(slashEffect, 80, UpAttackTransform);
             }
             else if (yAxis < 0 && !Grounded())
             {
                 pState.recoilingY = Hit(DownAttackTransform, DownAttackArea, Vector2.down, recoilYSpeed);
-                SlashEffectAngle(slashEffect, -90, DownAttackTransform);
             }
         }
     }
@@ -271,13 +267,6 @@ public class PlayerController : MonoBehaviour
         }
 
         return objectsToHit.Length > 0;
-    }
-
-    void SlashEffectAngle(GameObject effect, float angle, Transform position)
-    {
-        slashEffect = Instantiate(effect, position);
-        slashEffect.transform.eulerAngles = new Vector3(0, 0, angle);
-        slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
     }
 
     void Recoil()
