@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("Play game button clicked");
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Opening level");
     }
 
     public void AudioSettings()
