@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Vertical Movement Settings:")]
     [SerializeField] private float jumpForce = 45f;
-    private int jumpBufferCounter = 0;
+    private float jumpBufferCounter = 0f;
     [SerializeField] private int jumpBufferFrames;
     private float coyoteTimeCounter = 0f;
     [SerializeField] private float coyoteTime;
@@ -465,7 +465,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            jumpBufferCounter -= Mathf.RoundToInt(Time.deltaTime * 10);
+            jumpBufferCounter -= Time.deltaTime * 20;
         }
     }
 }
