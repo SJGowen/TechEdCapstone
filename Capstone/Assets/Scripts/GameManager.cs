@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Button playButton;
-    [SerializeField] Button settingsButton;
-    [SerializeField] Button quitButton;
 
     public string transitionedFromScene;
 
@@ -22,43 +19,24 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
         DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        playButton.onClick.AddListener(PlayGame);
-        //settingsButton.onClick.AddListener(AudioSettings);
-        quitButton.onClick.AddListener(QuitGame);
     }
 
     void Update()
     {
-
-    }
-
-    public void PlayGame()
-    {
-        Debug.Log("Play game button clicked");
-        SceneManager.LoadScene("Opening level");
-    }
-
-    public void AudioSettings()
-    {
-        // Debug.Log("Audio settings button clicked");
-        // Called from the OnClick event of the Audio Settings button in the UI
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quit game button clicked");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_WEBGL   
-        Application.OpenURL("https://softmine.itch.io/");
-#else
-        Application.Quit();
-#endif
+        if (PlayerController.Instance != null)
+        {
+            if (SceneManager.GetActiveScene().name == "Game Over" ||
+                SceneManager.GetActiveScene().name == "Welcome")
+            {
+                Destroy(PlayerController.Instance.gameObject);
+                PlayerController.Instance = null;
+            }
+        }
     }
 }
