@@ -9,4 +9,5 @@ public class PlayerStateList : MonoBehaviour
     public bool lookingRight = false;
     public bool invincible = false;
     public bool cutscene = false;
+    public bool alive = true;
 }

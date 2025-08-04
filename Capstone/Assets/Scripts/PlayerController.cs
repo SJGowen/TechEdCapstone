@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,8 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 45f;
     private float jumpBufferCounter = 0f;
     [SerializeField] private int jumpBufferFrames;
-    private float coyoteTimeCounter = 0f;
-    [SerializeField] private float coyoteTime;
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJumps;
     private float gravity;
@@ -131,13 +130,16 @@ public class PlayerController : MonoBehaviour
         RestoreTimeScale();
 
         if (pState.dashing) return;
-        FlashWhileInvincible();
-        Move();
 
-        Flip();
-        Jump();
-        StartDash();
-        Attack();
+        if (pState.alive)
+        {
+            FlashWhileInvincible();
+            Flip();
+            Move();
+            Jump();
+            StartDash();
+            Attack();
+        }
     }
 
     private void FixedUpdate()
@@ -340,8 +342,19 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Health -= Mathf.RoundToInt(damage);
-        StartCoroutine(StopTakingDamage());
+        if (pState.alive)
+        {
+            Health -= Mathf.RoundToInt(damage);
+
+            if (Health <= 0)
+            {
+                StartCoroutine(Death());
+            }
+            else
+            {
+                StartCoroutine(StopTakingDamage());
+            }
+        }
     }
 
     IEnumerator StopTakingDamage()
@@ -413,6 +426,16 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
     }
 
+    IEnumerator Death()
+    {
+        pState.alive = false;
+        Time.timeScale = 1f;
+        anim.SetTrigger("Death");
+
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("GameOverScene");
+    }
+
     public bool Grounded()
     {
         return (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) ||
@@ -422,7 +445,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && !pState.jumping)
+        if (jumpBufferCounter > 0 && !pState.jumping)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             pState.jumping = true;
@@ -448,15 +471,7 @@ public class PlayerController : MonoBehaviour
         if (Grounded())
         {
             pState.jumping = false;
-            coyoteTimeCounter = coyoteTime;
             airJumpCounter = 0;
-        }
-        else
-        {
-            if (coyoteTimeCounter > 0)
-            {
-                coyoteTimeCounter -= Time.deltaTime;
-            }
         }
 
         if (Input.GetButtonDown("Jump"))
