@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] protected PlayerController player; // PlayerControllerscript.cs
     [SerializeField] protected float _enemySpeed; //Enemy's Speed
-    [SerializeField] protected float _damage; // Damage that enemy does to player
+    [SerializeField] protected float _enemydamage; // Damage that enemy does to player
 
     protected float _enemyRecoilTimer; // How long the enemy is recoilling for
     protected Rigidbody2D _enemyRigidBody; // Enemy RigidBody
@@ -65,14 +65,14 @@ public class EnemyAI : MonoBehaviour
         if (collision.collider.CompareTag("Player") && !player.pState.invincible)
         {
             Attack();
-            PlayerController.Instance.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
+            player.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
            
         }
     }
 
     protected virtual void Attack()
     {
-        player.TakeDamage(_damage); // Deals varying damage to the player
+        player.TakeDamage(_enemydamage); // Deals varying damage to the player
     }
 } 
 
