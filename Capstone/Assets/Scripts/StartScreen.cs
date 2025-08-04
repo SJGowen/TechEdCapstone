@@ -2,38 +2,38 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOverManager : MonoBehaviour
+public class StartScreen : MonoBehaviour
 {
     [SerializeField] Button playButton;
-    //[SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
-
-    public static GameOverManager Instance;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (playButton == null || quitButton == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.LogError("Buttons are not assigned in the StartScreen script.");
         }
         else
         {
-            Destroy(gameObject);
+            playButton.onClick.AddListener(PlayGame);
+            quitButton.onClick.AddListener(QuitGame);
         }
     }
 
     void Start()
     {
-        playButton.onClick.AddListener(PlayGame);
-        //settingsButton.onClick.AddListener(AudioSettings);
-        quitButton.onClick.AddListener(QuitGame);
+        
+    }
+
+    void Update()
+    {
+        
     }
 
     public void PlayGame()
     {
-        Debug.Log("Start Again button clicked");
-        SceneManager.LoadScene("Welcome");
+        Debug.Log("Play game button clicked");
+        SceneManager.LoadScene("Opening level");
     }
 
     public void QuitGame()

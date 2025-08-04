@@ -109,6 +109,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        ResetGame();   
+    }
+
+    void ResetGame()
+    {
         gravity = rb.gravityScale;
         Health = maxHealth;
     }
@@ -154,6 +159,12 @@ public class PlayerController : MonoBehaviour
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
         attack = Input.GetButtonDown("Attack");
+
+        // Simulate taking damage for testing purposes
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            TakeDamage(2);
+        }
     }
 
     void Flip()
@@ -433,7 +444,7 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Death");
 
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("Game Over");
     }
 
     public bool Grounded()
