@@ -14,11 +14,11 @@ public class DroidEnemy : EnemyAI
     protected override void Update()
     {
         base.Update(); // calling the Update method from its base class 
-        if (!_enemyIsRecoilling)
+        if (!_enemyIsRecoilling) 
         {
             transform.position = Vector2.MoveTowards
                 (transform.position, new Vector2(player.transform.position.x, transform.position.y),
-                 _enemySpeed * Time.deltaTime);
+                 _enemySpeed * Time.deltaTime); // Droid enemy class chase mechanic 
         }  
     }
 

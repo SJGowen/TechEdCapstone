@@ -4,7 +4,7 @@ public class EnemyAI : MonoBehaviour
 {
 
     [SerializeField] protected float _enemyHealth; // Enemy's health
-    [SerializeField] protected float _enemyRecoilLength;
+    [SerializeField] protected float _enemyRecoilLength; // Enemy's recoil distance
     [SerializeField] protected float _enemyRecoilFactor; // Strength of the recoil when enemy takes damage
     [SerializeField] protected bool _enemyIsRecoilling = false; // whether the enemy is recoiling or not
 
