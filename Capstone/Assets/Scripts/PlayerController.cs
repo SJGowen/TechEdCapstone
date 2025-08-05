@@ -213,21 +213,30 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator WalkIntoNewScene(Vector2 exitDir, float delay)
     {
-        if (exitDir.y > 0)
+        try
         {
-            rb.linearVelocity = jumpForce * exitDir;
-        }
 
-        if (exitDir.x != 0)
+
+            if (exitDir.y > 0)
+            {
+                rb.linearVelocity = jumpForce * exitDir;
+            }
+
+            if (exitDir.x != 0)
+            {
+                xAxis = exitDir.x > 0 ? 1 : -1;
+
+                Move();
+            }
+
+            Flip();
+            yield return new WaitForSeconds(delay);
+        }
+        finally
         {
-            xAxis = exitDir.x > 0 ? 1 : -1;
 
-            Move();
+            pState.cutscene = false;
         }
-
-        Flip();
-        yield return new WaitForSeconds(delay);
-        pState.cutscene = false;
     }
 
     void Attack()

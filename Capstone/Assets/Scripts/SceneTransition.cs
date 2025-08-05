@@ -27,7 +27,7 @@ public class SceneTransition : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (transitionTo == GameManager.Instance.transitionedFromScene)
         {
