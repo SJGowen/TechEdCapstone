@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +35,11 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(PlayerController.Instance.gameObject);
                 PlayerController.Instance = null;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
