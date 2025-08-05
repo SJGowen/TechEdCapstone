@@ -109,11 +109,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        ResetGame();   
-    }
-
-    void ResetGame()
-    {
         gravity = rb.gravityScale;
         Health = maxHealth;
     }
