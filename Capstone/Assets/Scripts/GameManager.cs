@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(PlayerController.Instance.gameObject);
                 PlayerController.Instance = null;
+                if (HeartBar.Instance != null)
+                {
+                    Destroy(HeartBar.Instance.gameObject);
+                }
+
                 Cursor.lockState = CursorLockMode.None;
             }
             else
