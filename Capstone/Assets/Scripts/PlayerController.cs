@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour
             if (health != value)
             {
                 health = Mathf.Clamp(value, 0, maxHealth);
+                if (HeartBar.Instance != null)
+                {
+                    HeartBar.Instance.SetHearts(health, maxHealth);
+                }
             }
         }
     }
@@ -111,6 +115,10 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         gravity = rb.gravityScale;
         Health = maxHealth;
+        if (HeartBar.Instance != null)
+        {
+            HeartBar.Instance.SetHearts(Health, maxHealth);
+        }
     }
 
     private void OnDrawGizmos()
@@ -158,7 +166,7 @@ public class PlayerController : MonoBehaviour
         // Simulate taking damage for testing purposes
         if (Input.GetKeyDown(KeyCode.L))
         {
-            TakeDamage(2);
+            TakeDamage(1);
         }
     }
 
@@ -366,7 +374,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator StopTakingDamage()
     {
         pState.invincible = true;
-        anim.SetTrigger("TakeDamage");
+        //anim.SetTrigger("TakeDamage");
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
     }
