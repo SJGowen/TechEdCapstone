@@ -6608,7 +6608,7 @@ PrefabInstance:
       objectReference: {fileID: 1909530290}
     - target: {fileID: 6289945744774823297, guid: 8014f5c05a2d34a46b43743cd4eac1c0, type: 3}
       propertyPath: transitionTo
-      value: Upper level
+      value: Upper Level
       objectReference: {fileID: 0}
     - target: {fileID: 6289945744774823297, guid: 8014f5c05a2d34a46b43743cd4eac1c0, type: 3}
       propertyPath: exitDirection.x
