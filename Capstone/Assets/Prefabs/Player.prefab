@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2319551315171951829}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,6 @@ MonoBehaviour:
   walkSpeed: 20
   jumpForce: 45
   jumpBufferFrames: 8
-  coyoteTime: 0.1
   maxAirJumps: 1
   groundCheckPoint: {fileID: 48005946190354955}
   groundCheckX: 0.5
@@ -238,7 +237,6 @@ MonoBehaviour:
     m_Bits: 0
   timeBetweenAttack: 1
   damage: 2
-  slashEffect: {fileID: 0}
   recoilXSteps: 5
   recoilYSteps: 5
   recoilXSpeed: 100
@@ -266,6 +264,7 @@ MonoBehaviour:
   lookingRight: 0
   invincible: 0
   cutscene: 0
+  alive: 1
 --- !u!95 &2319551315171951829
 Animator:
   serializedVersion: 7

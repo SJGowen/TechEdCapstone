@@ -62,7 +62,7 @@ public class EnemyAI : MonoBehaviour
 
     protected void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") && !player.pState.invincible)
+        if (collision.collider.CompareTag("Player") && !player.pState.invincible) // <= null reference causing issue
         {
             Attack();
             player.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch

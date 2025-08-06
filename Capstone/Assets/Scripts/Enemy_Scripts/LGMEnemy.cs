@@ -39,7 +39,7 @@ public class LGMEnemy : EnemyAI
 
     void Shoot()
     {
-        //Instantiate(_enemyLaserBullet, _enemyLaserBullet.position, Quaternion.identity);
+        Destroy(Instantiate(_enemyLaserBullet, _enemyLaserPos.position, Quaternion.identity), 5);
     }
 }
 

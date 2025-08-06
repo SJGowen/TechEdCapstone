@@ -10,10 +10,18 @@ public class EnemyLaserScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _lgmLaser = GetComponent<Rigidbody2D>();
-        //player = 
+        _lgmLaser = GetComponent<Rigidbody2D>(); // laser bullet
+        player = GameObject.FindGameObjectWithTag("Player"); // Find Player
+
+
 
         Vector3 direction = player.transform.position - transform.position;
+
+        _lgmLaser.linearVelocity = new Vector2(direction.x, direction.y).normalized * _laserForce;
+
+        float _lgmLaserRot = Mathf.Atan2(-direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, _lgmLaserRot + 90);
     }
 
     // Update is called once per frame
