@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Little_Green_Man_Asset_Sheet_0: -2885342964945144071
+      Little_Green_Man_Asset_Sheet_1: 986569253288814510
+      Little_Green_Man_Asset_Sheet_2: -896279812046483666
+      Little_Green_Man_Asset_Sheet_3: -4379396487684535127
+      Little_Green_Man_Asset_Sheet_4: -1273877637193518531
+      Little_Green_Man_Asset_Sheet_5: 7786373811120796728
+      Little_Green_Man_Asset_Sheet_6: 2357794123157658576
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,11 @@ public class PlayerController : MonoBehaviour
     [Header("Vertical Movement Settings:")]
     [SerializeField] private float jumpForce = 45f;
     private float jumpBufferCounter = 0f;
-    [SerializeField] private int jumpBufferFrames;
+    [SerializeField] private float jumpBufferTime = 0.2f;
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJumps;
     private float gravity;
+    [SerializeField] float outOfBoundsY = -12f;
     [Space(5)]
 
     [Header("Ground Check Settings:")]
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         if (pState.cutscene) return;
 
+        CheckPlayerIsOnMap();
         GetInputs();
         UpdateJumpVariables();
         RestoreTimeScale();
@@ -147,6 +150,14 @@ public class PlayerController : MonoBehaviour
             Jump();
             StartDash();
             Attack();
+        }
+    }
+
+    private void CheckPlayerIsOnMap()
+    {
+        if (transform.position.y < outOfBoundsY)
+        {
+            TakeDamage(Health);
         }
     }
 
@@ -221,30 +232,22 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator WalkIntoNewScene(Vector2 exitDir, float delay)
     {
-        try
+        if (exitDir.y != 0)
         {
-
-
-            if (exitDir.y > 0)
-            {
-                rb.linearVelocity = jumpForce * exitDir;
-            }
-
-            if (exitDir.x != 0)
-            {
-                xAxis = exitDir.x > 0 ? 1 : -1;
-
-                Move();
-            }
-
-            Flip();
-            yield return new WaitForSeconds(delay);
+            rb.linearVelocity = jumpForce * exitDir;
         }
-        finally
+
+        if (exitDir.x != 0)
         {
+            xAxis = exitDir.x > 0 ? 1 : -1;
 
-            pState.cutscene = false;
+            Move();
         }
+
+        Flip();
+        yield return new WaitForSeconds(delay);
+
+        pState.cutscene = false;
     }
 
     void Attack()
@@ -319,7 +322,6 @@ public class PlayerController : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, -recoilYSpeed);
             }
-            airJumpCounter = 0;
         }
         else
         {
@@ -383,7 +385,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator StopTakingDamage()
     {
         pState.invincible = true;
-        //anim.SetTrigger("TakeDamage");
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
     }
@@ -470,13 +471,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpBufferCounter > 0 && !pState.jumping)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             pState.jumping = true;
-        }
-        else if (!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
-        {
-            pState.jumping = true;
-            airJumpCounter++;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
@@ -495,15 +490,17 @@ public class PlayerController : MonoBehaviour
         {
             pState.jumping = false;
             airJumpCounter = 0;
+            jumpBufferCounter = 0f;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && airJumpCounter < maxAirJumps)
         {
-            jumpBufferCounter = jumpBufferFrames;
+            airJumpCounter++;
+            jumpBufferCounter = jumpBufferTime;
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime * 20;
+            jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
         }
     }
 }
