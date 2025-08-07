@@ -22,7 +22,7 @@ public class LGMEnemy : EnemyAI
     protected override void Update()
     {
         base.Update(); // calling the Update method from its base class
-        //_lgmAnim.Set
+        base.LookAtplayer();
 
         if (!_enemyIsRecoilling)
         {
@@ -32,6 +32,7 @@ public class LGMEnemy : EnemyAI
             if (_lgmDistance < 7)
             {
                 _lgmTimer += Time.deltaTime;
+                
 
                 if (_lgmTimer > 1)
                 {
