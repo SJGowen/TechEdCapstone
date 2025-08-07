@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
         if (pState.alive)
         {
+            HandleParachute();
             FlashWhileInvincible();
             Flip();
             Move();
@@ -178,6 +179,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             TakeDamage(1);
+        }
+    }
+
+    private void HandleParachute()
+    {
+        if (Input.GetKey(KeyCode.E) && rb.linearVelocity.y < -10f && !pState.parachuting)
+        {
+            pState.parachuting = true;
+            anim.SetBool("Parachuting", true);
+
+            // Reduce fall speed for parachute effect
+            rb.gravityScale = gravity * 0.2f; // Adjust as needed
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -10f)); // Clamp fall speed
+        }
+        else if ((Grounded() || rb.linearVelocity.y >= 0))
+        {
+            pState.parachuting = false;
+            anim.SetBool("Parachuting", false);
+
+            // Restore normal gravity
+            rb.gravityScale = gravity;
         }
     }
 

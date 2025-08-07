@@ -115,8 +115,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -6644210131337261254, guid: 17d8c958b3b9f409e98ea8b255533655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -161,17 +161,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.54}
+  m_Offset: {x: 0.0071401596, y: -0.09881997}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 2.56}
+    oldSize: {x: 4.42, y: 5.08}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.4}
+  m_Size: {x: 3.8034477, y: 4.74243}
   m_EdgeRadius: 0
 --- !u!50 &2895892047191220447
 Rigidbody2D:
@@ -214,8 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 20
   jumpForce: 45
-  jumpBufferFrames: 8
+  jumpBufferTime: 0.2
   maxAirJumps: 1
+  outOfBoundsY: -12
   groundCheckPoint: {fileID: 48005946190354955}
   groundCheckX: 0.5
   groundCheckY: 0.2
@@ -242,7 +243,7 @@ MonoBehaviour:
   recoilXSpeed: 100
   recoilYSpeed: 32
   health: 0
-  maxHealth: 10
+  maxHealth: 5
   hitFlashSpeed: 0.5
   pState: {fileID: 0}
 --- !u!114 &2610462269103359258
@@ -265,6 +266,7 @@ MonoBehaviour:
   invincible: 0
   cutscene: 0
   alive: 1
+  parachuting: 0
 --- !u!95 &2319551315171951829
 Animator:
   serializedVersion: 7
@@ -312,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 5088590138102161305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.23, z: 0}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

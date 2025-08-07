@@ -10,4 +10,5 @@ public class PlayerStateList : MonoBehaviour
     public bool invincible = false;
     public bool cutscene = false;
     public bool alive = true;
+    public bool parachuting = false;
 }
