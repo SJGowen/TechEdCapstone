@@ -21,14 +21,21 @@ public class LGMEnemy : EnemyAI
         base.Update(); // calling the Update method from its base class
         if (!_enemyIsRecoilling)
         {
-            _lgmTimer += Time.deltaTime;
 
-            if (_lgmTimer > 2)
+
+            float _lgmDistance = Vector2.Distance(transform.position, player.transform.position);
+            Debug.Log(_lgmDistance);
+
+            if (_lgmDistance < 7)
             {
-                _lgmTimer = 0;
-                Shoot();
+                _lgmTimer += Time.deltaTime;
+
+                if (_lgmTimer > 1)
+                {
+                    _lgmTimer = 0;
+                    Shoot();
+                }
             }
-            // Droid enemy class chase mechanic 
         }
     }
 
@@ -39,8 +46,10 @@ public class LGMEnemy : EnemyAI
 
     void Shoot()
     {
-        Destroy(Instantiate(_enemyLaserBullet, _enemyLaserPos.position, Quaternion.identity), 5);
+        Destroy(Instantiate(_enemyLaserBullet, _enemyLaserPos.position, Quaternion.identity), 4);
     }
+
+    
 }
 
 /*

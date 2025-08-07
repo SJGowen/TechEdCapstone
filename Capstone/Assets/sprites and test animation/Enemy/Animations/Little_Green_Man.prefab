@@ -681,9 +681,11 @@ Animation:
   m_Enabled: 1
   serializedVersion: 4
   m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 13a4d35023bb04094ad62d8b6b8aa09e, type: 2}
+  - {fileID: 7400000, guid: 11084f04d8b89440c9343208235344e1, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
