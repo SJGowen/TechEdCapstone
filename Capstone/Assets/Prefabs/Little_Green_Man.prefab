@@ -738,10 +738,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyHealth: 2
-  _enemyRecoilLength: 2
+  _enemyRecoilLength: 6
   _enemyRecoilFactor: 0.2
   _enemyIsRecoilling: 0
-  player: {fileID: 4144868507484462544, guid: c553fc12bfca14c4b876525aa4858f7f, type: 3}
+  player: {fileID: 0}
   _enemySpeed: 0
   _enemydamage: 1
   _enemyLaserBullet: {fileID: 517884789671073328, guid: b99f75ba95920473daed3113a10392a7, type: 3}
