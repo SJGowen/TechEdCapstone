@@ -25,6 +25,7 @@ public class DroidEnemy : EnemyAI
     public override void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce); // calling the Enemyhit Method from its base class
+        Debug.Log("Hit!");
     }
 }
 

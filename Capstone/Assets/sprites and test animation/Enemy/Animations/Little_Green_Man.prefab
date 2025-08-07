@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6507086649544336393}
   - component: {fileID: 4619153264345161756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man _Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311268499223382636}
   - component: {fileID: 2220790548217962019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_UpperRightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3557676444610636281}
   - component: {fileID: 2965255687668343302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6045661874477596584}
   - component: {fileID: 6919611136872307647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_ForeRightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4184593450691517644}
   - component: {fileID: 747163855801578713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_UpperLeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,6 +435,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3743498808588320392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899522426373189018}
+  m_Layer: 6
+  m_Name: _enemyLaserPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899522426373189018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743498808588320392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.48, y: 4.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 847725500804674244}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6440461587941206252
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847725500804674244}
   - component: {fileID: 3413091046025195254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_ForeLeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +495,8 @@ Transform:
   m_LocalPosition: {x: 1.245, y: 1.118, z: -0.062164877}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 5899522426373189018}
   m_Father: {fileID: 7033661625600608650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3413091046025195254
@@ -532,7 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2504412369362996428}
   - component: {fileID: 3225957410129579740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little_Green_Man_Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +652,11 @@ GameObject:
   - component: {fileID: 7033661625600608650}
   - component: {fileID: 444556796788653938}
   - component: {fileID: 6268960401056006756}
-  m_Layer: 0
+  - component: {fileID: 5585482533687114500}
+  - component: {fileID: 7885145416935764431}
+  - component: {fileID: 5849477232847300686}
+  - component: {fileID: 6462524270017888117}
+  m_Layer: 6
   m_Name: Little_Green_Man
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,3 +725,144 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &5585482533687114500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160981877872151476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab93cf660266484b8a5135e0f56fa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 2
+  _enemyRecoilLength: 2
+  _enemyRecoilFactor: 0.2
+  _enemyIsRecoilling: 0
+  player: {fileID: 4144868507484462544, guid: c553fc12bfca14c4b876525aa4858f7f, type: 3}
+  _enemySpeed: 0
+  _enemydamage: 1
+  _enemyLaserBullet: {fileID: 517884789671073328, guid: b99f75ba95920473daed3113a10392a7, type: 3}
+  _enemyLaserPos: {fileID: 5899522426373189018}
+  _lgmTimer: 2
+--- !u!61 &7885145416935764431
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160981877872151476}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.27836525, y: -0.0004043579}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 21.349998, y: 27.276855}
+    newSize: {x: 21.349998, y: 27.276855}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.6256006, y: 3.9993658}
+  m_EdgeRadius: 0
+--- !u!50 &5849477232847300686
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160981877872151476}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &6462524270017888117
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160981877872151476}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.26687527, y: 0.007186413}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 21.349998, y: 27.276855}
+    newSize: {x: 21.349998, y: 27.276855}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.8530107, y: 4.1763735}
+  m_EdgeRadius: 0
