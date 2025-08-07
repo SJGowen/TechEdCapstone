@@ -4678,6 +4678,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 48005946190354955, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_Size.x
+      value: 3.8034477
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_Size.y
+      value: 4.74243
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0071401596
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09881997
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 5.08
+      objectReference: {fileID: 0}
     - target: {fileID: 3728329036532276770, guid: 074279f282d7f774089a1b43026f040a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4726,6 +4754,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8247215802276616625, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6644210131337261254, guid: 17d8c958b3b9f409e98ea8b255533655, type: 3}
     - target: {fileID: 8247215802276616625, guid: 074279f282d7f774089a1b43026f040a, type: 3}
       propertyPath: m_SortingOrder
       value: 2
