@@ -29,7 +29,7 @@ public class LGMEnemy : EnemyAI
 
 
             float _lgmDistance = Vector2.Distance(transform.position, player.transform.position);
-            Debug.Log(_lgmDistance);
+            
 
             if (_lgmDistance < 7)
             {
@@ -43,7 +43,7 @@ public class LGMEnemy : EnemyAI
             }
             else
             {
-                _lgmAnim.SetTrigger("Idle");
+                _lgmAnim.Play("Idle");
             }
         }
     }
@@ -51,10 +51,12 @@ public class LGMEnemy : EnemyAI
     public override void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce); // calling the Enemyhit Method from its base class
+        Debug.Log("Hit!");
     }
 
     void Shoot()
     {
+        _lgmAnim.Play("Shooting");
         Destroy(Instantiate(_enemyLaserBullet, _enemyLaserPos.position, Quaternion.identity), 4);
     }
 
