@@ -31,8 +31,7 @@ public class BossFight : MonoBehaviour
 			isFlipped = true;
 		}
 	}
-
-
+	
 
 	public void TakeDamage(int damage)
 	{
@@ -41,7 +40,7 @@ public class BossFight : MonoBehaviour
 
 		health -= damage;
 
-	
+
 
 		if (health <= 0)
 		{

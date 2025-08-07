@@ -9,11 +9,14 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected bool _enemyIsRecoilling = false; // whether the enemy is recoiling or not
 
     [SerializeField] protected PlayerController player; // PlayerControllerscript.cs
+    
     [SerializeField] protected float _enemySpeed; //Enemy's Speed
     [SerializeField] protected float _enemydamage; // Damage that enemy does to player
 
     protected float _enemyRecoilTimer; // How long the enemy is recoilling for
     protected Rigidbody2D _enemyRigidBody; // Enemy RigidBody
+
+    protected bool _enemyIsFlipped = false;
 
 
     protected virtual void Awake()
@@ -62,11 +65,11 @@ public class EnemyAI : MonoBehaviour
 
     protected void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") && !player.pState.invincible) 
+        if (collision.collider.CompareTag("Player") && !player.pState.invincible)
         {
             Attack();
             player.HitStopTime(0, 2, 0.2f); // add line back in after pulling from updated dev  branch
-           
+
         }
     }
 
@@ -74,6 +77,26 @@ public class EnemyAI : MonoBehaviour
     {
         player.TakeDamage(_enemydamage); // Deals varying damage to the player
     }
+
+    // protected virtual void LookAtplayer()
+    // {
+    //     Vector3 flipped = transform.localScale;
+    //     flipped.z *= -1f;
+
+    //     if (transform.position.x > player.transform.position.x && _enemyIsFlipped)
+    //     {
+    //         transform.localScale = flipped;
+    //         transform.Rotate(0f, 180f, 0f);
+    //         _enemyIsFlipped = false;
+    //     }
+    //     else if (transform.position.x < player.transform.position.x && _enemyIsFlipped)
+    //     {
+    //         transform.localScale = flipped;
+    //         transform.Rotate(0f, 180f, 0f);
+    //         _enemyIsFlipped = true;
+    //     }
+
+    // }
 } 
 
 
