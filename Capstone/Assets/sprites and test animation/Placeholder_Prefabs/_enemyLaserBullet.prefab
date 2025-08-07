@@ -102,7 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433080e04181c4a0ea2bb654e62aa5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3728329036532276770, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+  _enemyHealth: 1
+  _enemyRecoilLength: 0
+  _enemyRecoilFactor: 0
+  _enemyIsRecoilling: 0
+  player: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+  _enemySpeed: 0
+  _enemydamage: 0
   _lgmLaser: {fileID: 0}
   _laserForce: 8
 --- !u!50 &-7874465523589900788
