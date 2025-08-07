@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -144,6 +143,7 @@ public class PlayerController : MonoBehaviour
 
         if (pState.alive)
         {
+            HandleParachute();
             FlashWhileInvincible();
             Flip();
             Move();
@@ -178,6 +178,26 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             TakeDamage(1);
+        }
+    }
+
+    private void HandleParachute()
+    {
+        if (Input.GetKey(KeyCode.E) && rb.linearVelocity.y < -10f && !pState.parachuting)
+        {
+            pState.parachuting = true;
+            anim.SetBool("Parachuting", true);
+
+            // Reduce fall speed for parachute effect
+            rb.gravityScale = gravity * 0.1f;
+        }
+        else if ((Grounded() || rb.linearVelocity.y >= 0))
+        {
+            pState.parachuting = false;
+            anim.SetBool("Parachuting", false);
+
+            // Restore normal gravity
+            rb.gravityScale = gravity;
         }
     }
 
@@ -220,11 +240,11 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         pState.dashing = true;
         anim.SetTrigger("Dashing");
-        rb.gravityScale = 0f;
+        //rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         if (Grounded()) Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
-        rb.gravityScale = gravity;
+        //rb.gravityScale = gravity;
         pState.dashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
@@ -313,7 +333,6 @@ public class PlayerController : MonoBehaviour
 
         if (pState.recoilingY)
         {
-            rb.gravityScale = 0;
             if (yAxis < 0)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, recoilYSpeed);
@@ -323,11 +342,7 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, -recoilYSpeed);
             }
         }
-        else
-        {
-            rb.gravityScale = gravity;
-        }
-
+ 
         //stop recoil
         if (pState.recoilingX && stepsXRecoiled < recoilXSteps)
         {
