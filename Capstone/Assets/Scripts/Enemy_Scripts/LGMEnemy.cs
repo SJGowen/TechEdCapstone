@@ -26,8 +26,6 @@ public class LGMEnemy : EnemyAI
 
         if (!_enemyIsRecoilling)
         {
-
-
             float _lgmDistance = Vector2.Distance(transform.position, player.transform.position);
             
 

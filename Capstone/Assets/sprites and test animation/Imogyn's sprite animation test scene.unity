@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 250391305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9, y: 3.5025125, z: -10}
+  m_LocalPosition: {x: 6.41, y: 3.5025125, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 406337190}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9, y: 3.5025125, z: -10}
+  m_LocalPosition: {x: 6.41, y: 3.5025125, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -708,6 +708,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3490656654821958548, guid: c553fc12bfca14c4b876525aa4858f7f, type: 3}
   m_PrefabInstance: {fileID: 1686715655}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1195862879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3994061975293827185, guid: ddcc9b84e7f2c47829477a548a690ee6, type: 3}
+  m_PrefabInstance: {fileID: 1044431949089936587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1195862880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195862879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e7c620299839744ac5a091bcbc6403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 500
+  deathEffect: {fileID: 0}
+  isInvulnerable: 0
+  player: {fileID: 916012433}
+  isFlipped: 0
 --- !u!1 &1274678917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1034,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3490656654821958548, guid: c553fc12bfca14c4b876525aa4858f7f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.9
+      value: 6.41
       objectReference: {fileID: 0}
     - target: {fileID: 3490656654821958548, guid: c553fc12bfca14c4b876525aa4858f7f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1751,6 +1773,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5585482533687114500, guid: ee29472464db94ac484721c4e7200bfd, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 916012429}
+    - target: {fileID: 5585482533687114500, guid: ee29472464db94ac484721c4e7200bfd, type: 3}
       propertyPath: _enemyRecoilLength
       value: 6
       objectReference: {fileID: 0}
@@ -1797,6 +1823,10 @@ PrefabInstance:
     - target: {fileID: 9160981877872151476, guid: ee29472464db94ac484721c4e7200bfd, type: 3}
       propertyPath: m_Name
       value: Little_Green_Man
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160981877872151476, guid: ee29472464db94ac484721c4e7200bfd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1870,7 +1900,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3994061975293827185, guid: ddcc9b84e7f2c47829477a548a690ee6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1195862880}
   m_SourcePrefab: {fileID: 100100000, guid: ddcc9b84e7f2c47829477a548a690ee6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -1883,6 +1916,6 @@ SceneRoots:
   - {fileID: 486064757}
   - {fileID: 2066893769}
   - {fileID: 250391308}
-  - {fileID: 907936156726175007}
   - {fileID: 1044431949089936587}
   - {fileID: 1686715655}
+  - {fileID: 907936156726175007}

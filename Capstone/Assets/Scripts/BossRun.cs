@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BossRun : StateMachineBehaviour
 {
+    public static EnemyLaserScript _enemyLaser;
     public float speed = 2.5f;
     public float attackRange = 3f;
 
@@ -13,10 +14,12 @@ public class BossRun : StateMachineBehaviour
     {
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
+       
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.Play("Idle_Boss");
         boss.LookAtPlayer();
 
         Vector2 target = new Vector2(player.position.x, rb.position.y);
@@ -27,13 +30,14 @@ public class BossRun : StateMachineBehaviour
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             //Attack the player
-            animator.SetTrigger("Attack");
+            animator.Play("Shooting_Boss");
+            
         }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Shooting_Boss");
     }
 }
 

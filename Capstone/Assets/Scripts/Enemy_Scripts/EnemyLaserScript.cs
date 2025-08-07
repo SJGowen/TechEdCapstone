@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyLaserScript : EnemyAI
 {
-
+    
     [SerializeField] Rigidbody2D _lgmLaser;
     [SerializeField] public float _laserForce;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,12 +26,6 @@ public class EnemyLaserScript : EnemyAI
         float _lgmLaserRot = Mathf.Atan2(-direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, _lgmLaserRot + 90);
     }
-
-    // Update is called once per frame
-    // protected override void Update()
-    // {
-
-    // }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
