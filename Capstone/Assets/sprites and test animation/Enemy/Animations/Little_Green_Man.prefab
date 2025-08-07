@@ -435,6 +435,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3743498808588320392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899522426373189018}
+  m_Layer: 0
+  m_Name: _enemyLaserPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899522426373189018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743498808588320392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.48, y: 4.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 847725500804674244}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6440461587941206252
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +495,8 @@ Transform:
   m_LocalPosition: {x: 1.245, y: 1.118, z: -0.062164877}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 5899522426373189018}
   m_Father: {fileID: 7033661625600608650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3413091046025195254
@@ -620,6 +652,7 @@ GameObject:
   - component: {fileID: 7033661625600608650}
   - component: {fileID: 444556796788653938}
   - component: {fileID: 6268960401056006756}
+  - component: {fileID: 5585482533687114500}
   m_Layer: 0
   m_Name: Little_Green_Man
   m_TagString: Untagged
@@ -689,3 +722,25 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &5585482533687114500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160981877872151476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab93cf660266484b8a5135e0f56fa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 2
+  _enemyRecoilLength: 0
+  _enemyRecoilFactor: 0
+  _enemyIsRecoilling: 0
+  player: {fileID: 0}
+  _enemySpeed: 0
+  _enemydamage: 1
+  _enemyLaserBullet: {fileID: 517884789671073328, guid: b99f75ba95920473daed3113a10392a7, type: 3}
+  _enemyLaserPos: {fileID: 5899522426373189018}
+  _lgmTimer: 2

@@ -6,6 +6,8 @@ public class LGMEnemy : EnemyAI
     [SerializeField] public Transform _enemyLaserPos; // enemy Laser Position
     [SerializeField] private float _lgmTimer; // Time between shots
 
+    private Animator _lgmAnim; // Animations
+
     protected override void Awake()
     {
         base.Awake(); // calling the Awake method from its base class
@@ -14,11 +16,14 @@ public class LGMEnemy : EnemyAI
     public override void Start()
     {
         _enemyRigidBody.gravityScale = 12f; // Applies gravity scale to this Rigidbody
+        _lgmAnim = GetComponent<Animator>();
     }
 
     protected override void Update()
     {
         base.Update(); // calling the Update method from its base class
+        //_lgmAnim.Set
+
         if (!_enemyIsRecoilling)
         {
 
@@ -35,6 +40,10 @@ public class LGMEnemy : EnemyAI
                     _lgmTimer = 0;
                     Shoot();
                 }
+            }
+            else
+            {
+                _lgmAnim.SetTrigger("Idle");
             }
         }
     }
