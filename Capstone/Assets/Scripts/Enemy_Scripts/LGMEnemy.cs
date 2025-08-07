@@ -22,7 +22,7 @@ public class LGMEnemy : EnemyAI
     protected override void Update()
     {
         base.Update(); // calling the Update method from its base class
-        base.LookAtplayer();
+        // base.LookAtplayer();
 
         if (!_enemyIsRecoilling)
         {

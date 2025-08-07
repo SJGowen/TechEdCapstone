@@ -78,25 +78,25 @@ public class EnemyAI : MonoBehaviour
         player.TakeDamage(_enemydamage); // Deals varying damage to the player
     }
 
-    protected virtual void LookAtplayer()
-    {
-        Vector3 flipped = transform.localScale;
-        flipped.z *= -1f;
+    // protected virtual void LookAtplayer()
+    // {
+    //     Vector3 flipped = transform.localScale;
+    //     flipped.z *= -1f;
 
-        if (transform.position.x > player.transform.position.x && _enemyIsFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            _enemyIsFlipped = false;
-        }
-        else if (transform.position.x < player.transform.position.x && _enemyIsFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            _enemyIsFlipped = true;
-        }
+    //     if (transform.position.x > player.transform.position.x && _enemyIsFlipped)
+    //     {
+    //         transform.localScale = flipped;
+    //         transform.Rotate(0f, 180f, 0f);
+    //         _enemyIsFlipped = false;
+    //     }
+    //     else if (transform.position.x < player.transform.position.x && _enemyIsFlipped)
+    //     {
+    //         transform.localScale = flipped;
+    //         transform.Rotate(0f, 180f, 0f);
+    //         _enemyIsFlipped = true;
+    //     }
 
-    }
+    // }
 } 
 
 
