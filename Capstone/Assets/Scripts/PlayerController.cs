@@ -60,7 +60,11 @@ public class PlayerController : MonoBehaviour
     [Header("Health Settings:")]
     public int health;
     public int maxHealth;
-    [SerializeField] float hitFlashSpeed;
+    [SerializeField] private float hitFlashSpeed;
+    [Space(5)]
+
+    [Header("Audio Settings:")]
+    [SerializeField] private AudioClip[] audioClips;
     [Space(5)]
 
     [HideInInspector] public PlayerStateList pState;
@@ -143,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
         if (pState.alive)
         {
-            HandleParachute();
+            Parachute();
             FlashWhileInvincible();
             Flip();
             Move();
@@ -181,7 +185,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleParachute()
+    private void Parachute()
     {
         if (Input.GetKey(KeyCode.E) && rb.linearVelocity.y < -10f && !pState.parachuting)
         {
@@ -191,7 +195,7 @@ public class PlayerController : MonoBehaviour
             // Reduce fall speed for parachute effect
             rb.gravityScale = gravity * 0.1f;
         }
-        else if ((Grounded() || rb.linearVelocity.y >= 0))
+        else if (Grounded() || rb.linearVelocity.y >= 0)
         {
             pState.parachuting = false;
             anim.SetBool("Parachuting", false);
@@ -517,5 +521,10 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
         }
+    }
+
+    public void PlayHammerSound()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(audioClips[0], transform, 1f);
     }
 }
