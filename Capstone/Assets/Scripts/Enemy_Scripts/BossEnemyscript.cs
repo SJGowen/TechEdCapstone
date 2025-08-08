@@ -14,11 +14,12 @@ public class BossEnemyscript : EnemyAI
 
     protected override void Awake()
     {
-        base.Awake(); // calling the Awake method from its base class
+        // base.Awake(); // calling the Awake method from its base class
     }
 
     public override void Start()
     {
+        base.Start();
         _enemyRigidBody.gravityScale = 12f; // Applies gravity scale to this Rigidbody
         _lgmbossAnim = GetComponent<Animator>();
         

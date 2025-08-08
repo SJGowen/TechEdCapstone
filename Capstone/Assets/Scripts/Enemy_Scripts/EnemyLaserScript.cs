@@ -15,11 +15,11 @@ public class EnemyLaserScript : EnemyAI
 
     protected override void Awake()
     {
-        base.Awake();
+        //base.Awake();
     }
     public override void Start()
     {
-
+        base.Start();
         _lgmLaser = GetComponent<Rigidbody2D>(); // laser bullet
         _lgmLaser.gravityScale = 0f; // Applies gravity scale to this Rigidbody
         _laserSound = GetComponent<AudioSource>();
@@ -36,6 +36,7 @@ public class EnemyLaserScript : EnemyAI
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // Debug.Log("collision gameObject" + collision.gameObject);
         if (collision.gameObject.CompareTag("Player"))
         {
             Attack();

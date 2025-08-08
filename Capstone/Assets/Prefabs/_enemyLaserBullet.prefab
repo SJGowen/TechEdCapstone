@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.13794944, g: 0.8846682, b: 0.9433962, a: 1}
   m_FlipX: 0
@@ -109,9 +109,10 @@ MonoBehaviour:
   _enemyIsRecoilling: 0
   player: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
   _enemySpeed: 0
-  _enemydamage: 0
+  _enemydamage: 1
   _lgmLaser: {fileID: 0}
   _laserForce: 8
+  _laserBlast: {fileID: 0}
 --- !u!50 &-7874465523589900788
 Rigidbody2D:
   serializedVersion: 5

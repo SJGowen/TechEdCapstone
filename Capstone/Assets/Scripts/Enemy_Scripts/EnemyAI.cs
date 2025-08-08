@@ -37,14 +37,14 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _enemyRigidBody = GetComponent<Rigidbody2D>(); // Getting that enemy's Rigidbody
-        player = PlayerController.Instance; // PlayerControllerScript is referenced as "player" in this script and its children
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
-
+        _enemyRigidBody = GetComponent<Rigidbody2D>(); // Getting that enemy's Rigidbody
+        player = PlayerController.Instance; // PlayerControllerScript is referenced as "player" in this script and its children
     }
 
     // Update is called once per frame
@@ -103,6 +103,7 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Attack()
     {
+        // Debug.Log("enemyAI attack called iinflicting damage" + _enemydamage);
         player.TakeDamage(_enemydamage); // Deals varying damage to the player
     }
 
