@@ -19,6 +19,22 @@ public class EnemyAI : MonoBehaviour
     protected bool _enemyIsFlipped = false;
 
 
+    protected enum EnemyStates
+    {
+        // Droid
+        Droid_idle,
+        Droid_Flip,
+
+        //Little Green Man
+        LGM_Idle,
+        LGM_Shoot
+
+
+
+    }
+    protected EnemyStates currentEnemyState;
+
+
     protected virtual void Awake()
     {
         _enemyRigidBody = GetComponent<Rigidbody2D>(); // Getting that enemy's Rigidbody
@@ -34,6 +50,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        UpdateEnemyStates();
+
         if (_enemyHealth <= 0) // That Enemy has no health left
         {
             Destroy(gameObject); // Destroys that Enemy 
@@ -73,30 +91,22 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    protected virtual void UpdateEnemyStates()
+    {
+        
+    }
+
+    protected void ChangeState(EnemyStates _newEnemyState)
+    {
+        currentEnemyState = _newEnemyState;
+    }
+
     protected virtual void Attack()
     {
         player.TakeDamage(_enemydamage); // Deals varying damage to the player
     }
 
-    // protected virtual void LookAtplayer()
-    // {
-    //     Vector3 flipped = transform.localScale;
-    //     flipped.z *= -1f;
-
-    //     if (transform.position.x > player.transform.position.x && _enemyIsFlipped)
-    //     {
-    //         transform.localScale = flipped;
-    //         transform.Rotate(0f, 180f, 0f);
-    //         _enemyIsFlipped = false;
-    //     }
-    //     else if (transform.position.x < player.transform.position.x && _enemyIsFlipped)
-    //     {
-    //         transform.localScale = flipped;
-    //         transform.Rotate(0f, 180f, 0f);
-    //         _enemyIsFlipped = true;
-    //     }
-
-    // }
+    
 } 
 
 

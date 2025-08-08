@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1227141787657001036}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.110000014, y: 1.5699997, z: -0.062164877}
+  m_LocalPosition: {x: -0.109999895, y: 1.5699997, z: -0.062164877}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 1737982863474935698}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.015663628, w: 0.9998774}
-  m_LocalPosition: {x: -0.585, y: 0.543, z: -0.062164877}
+  m_LocalPosition: {x: -0.58500004, y: 0.5430002, z: -0.062164877}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -375,7 +375,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000003729057, y: 0.000000034597637, z: 0.092332594, w: -0.99572825}
   m_LocalPosition: {x: 0.5910001, y: 0.4949999, z: -0.062164877}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.2}
+  m_LocalScale: {x: 0.19999996, y: 0.19999996, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7033661625600608650}
@@ -542,7 +542,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 30b80b1b59fb043e9bdbcb85b7136d86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -581,7 +581,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000037441873, y: 0.0000000081291365, z: 0.02166494, w: -0.99976534}
   m_LocalPosition: {x: 0.19000006, y: -1.1700001, z: -0.062164877}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.2}
+  m_LocalScale: {x: 0.19999996, y: 0.19999996, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7033661625600608650}
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab93cf660266484b8a5135e0f56fa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHealth: 2
+  _enemyHealth: 5
   _enemyRecoilLength: 6
   _enemyRecoilFactor: 0.2
   _enemyIsRecoilling: 0
@@ -747,6 +747,7 @@ MonoBehaviour:
   _enemyLaserBullet: {fileID: 517884789671073328, guid: b99f75ba95920473daed3113a10392a7, type: 3}
   _enemyLaserPos: {fileID: 5899522426373189018}
   _lgmTimer: 2
+  _lgmShootDistance: 7
 --- !u!61 &7885145416935764431
 BoxCollider2D:
   m_ObjectHideFlags: 0

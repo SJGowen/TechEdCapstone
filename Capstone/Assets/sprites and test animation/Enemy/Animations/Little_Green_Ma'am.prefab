@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1648533694219944456}
   m_Layer: 0
-  m_Name: _enemyLaserPosition
+  m_Name: _bossLaserPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,10 +128,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8810867345021864932}
   - component: {fileID: 967137751086617978}
-  - component: {fileID: 1317281633888860269}
   - component: {fileID: 8095724906655154873}
   - component: {fileID: 2895861470192357802}
   - component: {fileID: 6525444166756646239}
+  - component: {fileID: 754922748669374236}
   m_Layer: 0
   m_Name: Little_Green_Ma'am
   m_TagString: Untagged
@@ -183,28 +183,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1317281633888860269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3994061975293827185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab93cf660266484b8a5135e0f56fa1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyHealth: 7
-  _enemyRecoilLength: 0.4
-  _enemyRecoilFactor: 2
-  _enemyIsRecoilling: 0
-  player: {fileID: 0}
-  _enemySpeed: 0
-  _enemydamage: 0
-  _enemyLaserBullet: {fileID: 517884789671073328, guid: b99f75ba95920473daed3113a10392a7, type: 3}
-  _enemyLaserPos: {fileID: 0}
-  _lgmTimer: 2
 --- !u!61 &8095724906655154873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -324,6 +302,29 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.0525854, y: 5.076682}
   m_EdgeRadius: 0
+--- !u!114 &754922748669374236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994061975293827185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d1a40b5c8c44f0abb775f4bd7dd430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 10
+  _enemyRecoilLength: 0.5
+  _enemyRecoilFactor: 0.5
+  _enemyIsRecoilling: 0
+  player: {fileID: 0}
+  _enemySpeed: 0
+  _enemydamage: 2
+  _enemyLaserBullet: {fileID: 7692893282703938023, guid: 5665e4ee0cf2f475caf718235270735c, type: 3}
+  _enemyLaserPos: {fileID: 1648533694219944456}
+  _lgmTimer: 2
+  _lgmShootDistance: 10
 --- !u!1 &4361449463308488064
 GameObject:
   m_ObjectHideFlags: 0
