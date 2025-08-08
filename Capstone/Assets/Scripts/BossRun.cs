@@ -9,6 +9,8 @@ public class BossRun : StateMachineBehaviour
     Rigidbody2D rb;
     BossFight boss;
 
+  
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -35,5 +37,8 @@ public class BossRun : StateMachineBehaviour
     {
         animator.ResetTrigger("Attack");
     }
+
+  
+
 }
 

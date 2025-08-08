@@ -13,6 +13,7 @@ public class BossFight : MonoBehaviour
 
 	public bool isFlipped = false;
 
+
 	public void LookAtPlayer()
 	{
 		Vector3 flipped = transform.localScale;
@@ -54,5 +55,7 @@ public class BossFight : MonoBehaviour
 		Instantiate(deathEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
 	}
+
+
 
 }
