@@ -216,7 +216,7 @@ MonoBehaviour:
   jumpForce: 45
   jumpBufferTime: 0.2
   maxAirJumps: 1
-  outOfBoundsY: -12
+  outOfBoundsY: -60
   groundCheckPoint: {fileID: 48005946190354955}
   groundCheckX: 0.5
   groundCheckY: 0.2
