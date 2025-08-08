@@ -195,9 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 95a55834e3b96d34ab04652b91266748, type: 2}
-  masterVolume: {fileID: 0}
-  soundFXVolume: {fileID: 0}
-  musicVolume: {fileID: 0}
+  masterVolume: {fileID: 385832209493773112}
+  soundFXVolume: {fileID: 8490226188723374103}
+  musicVolume: {fileID: 2455604509557771368}
 --- !u!1 &463809324417683024
 GameObject:
   m_ObjectHideFlags: 0
