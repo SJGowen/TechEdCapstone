@@ -6,6 +6,9 @@ public class BossLaserScript : MonoBehaviour
     [SerializeField] public float _bosslaserForce;
     [SerializeField] public float _bossDamage;
 
+    private AudioSource _bossLaserSound;
+    public AudioClip _bossLaserBlast;
+
     [SerializeField] protected PlayerController player; // PlayerControllerscript.cs
 
 
@@ -16,6 +19,8 @@ public class BossLaserScript : MonoBehaviour
         player = PlayerController.Instance;
         _bossLaser = GetComponent<Rigidbody2D>(); // laser bullet
         _bossLaser.gravityScale = 0f; // Applies gravity scale to this Rigidbody
+        _bossLaserSound = GetComponent<AudioSource>();
+
 
 
 
@@ -24,6 +29,8 @@ public class BossLaserScript : MonoBehaviour
 
         float _lgmLaserRot = Mathf.Atan2(-direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, _lgmLaserRot + 90);
+
+        _bossLaserSound.PlayOneShot(_bossLaserBlast, 1f);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

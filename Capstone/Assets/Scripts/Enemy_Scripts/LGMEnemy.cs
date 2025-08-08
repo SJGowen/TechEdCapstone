@@ -1,10 +1,15 @@
 using UnityEngine;
 
+
 public class LGMEnemy : EnemyAI
 {
     [SerializeField] public GameObject _enemyLaserBullet; // enemy Laser GameObject 
     [SerializeField] public Transform _enemyLaserPos; // enemy Laser Position
     [SerializeField] private float _lgmTimer; // Time between shots
+    [SerializeField] private float _lgmShootDistance = 7f;
+    
+    // [SerializeField] private float startDelay = 1f;
+
 
     private Animator _lgmAnim; // Animations
 
@@ -17,22 +22,23 @@ public class LGMEnemy : EnemyAI
     {
         _enemyRigidBody.gravityScale = 12f; // Applies gravity scale to this Rigidbody
         _lgmAnim = GetComponent<Animator>();
+        
+        
     }
 
     protected override void Update()
     {
         base.Update(); // calling the Update method from its base class
-        // base.LookAtplayer();
 
         if (!_enemyIsRecoilling)
         {
             float _lgmDistance = Vector2.Distance(transform.position, player.transform.position);
-            
 
-            if (_lgmDistance < 7)
+
+            if (_lgmDistance < _lgmShootDistance)
             {
                 _lgmTimer += Time.deltaTime;
-                
+
 
                 if (_lgmTimer > 1)
                 {
@@ -45,7 +51,10 @@ public class LGMEnemy : EnemyAI
                 _lgmAnim.Play("Idle");
             }
         }
+        FlipLGM();
     }
+
+    
 
     public override void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
@@ -59,12 +68,45 @@ public class LGMEnemy : EnemyAI
         Destroy(Instantiate(_enemyLaserBullet, _enemyLaserPos.position, Quaternion.identity), 4);
     }
 
-    
+
+    void FlipLGM()
+    {
+        if (player.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+
 }
 
-/*
+//  protected override void UpdateEnemyStates()
+    // {
+    //     float _lgmDistance = Vector2.Distance(transform.position, player.transform.position);
+    //     switch (currentEnemyState)
+    //     {
+    //         case EnemyStates.LGM_Idle:
 
+    //             if (_lgmDistance < _lgmShootDistance)
+    //             {
+    //                 ChangeState(EnemyStates.LGM_Shoot);
+    //                 Debug.Log("Changestate");
+    //             }
+    //             break;
 
+    //         case EnemyStates.LGM_Shoot:
+    //             _lgmTimer += Time.deltaTime;
+    //             if (_lgmTimer > 1)
+    //             {
+    //                 Shoot();
+    //                 _lgmTimer = 0;
+    //             }
+    //             FlipLGM();
+    //             break;
+    //     }
+    // }
 
-
-*/
