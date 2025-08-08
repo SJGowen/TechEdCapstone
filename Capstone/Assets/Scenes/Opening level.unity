@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &31293534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3728329036532276770, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+  m_PrefabInstance: {fileID: 1367525079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &35296587
 GameObject:
   m_ObjectHideFlags: 0
@@ -4343,6 +4348,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4478109738104294568, guid: 074279f282d7f774089a1b43026f040a, type: 3}
   m_PrefabInstance: {fileID: 1367525079}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &1194361464
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31293534}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0040385723, y: 0}
+  m_Size: {x: 3.4910827, y: 5.08}
+  m_Direction: 0
 --- !u!4 &1227140184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4354956732997354595, guid: 76be5df807cb44bbdb52a46dc205aab2, type: 3}
@@ -4723,13 +4765,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
-      propertyPath: outOfBoundsY
-      value: -60
+      propertyPath: jumpForce
+      value: 60
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: jumpBufferTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 979522343767814839, guid: 074279f282d7f774089a1b43026f040a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3728329036532276770, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1194361464}
   m_SourcePrefab: {fileID: 100100000, guid: 074279f282d7f774089a1b43026f040a, type: 3}
 --- !u!1001 &1390182863
 PrefabInstance:
