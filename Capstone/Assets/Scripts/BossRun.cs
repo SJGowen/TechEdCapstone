@@ -13,6 +13,8 @@ public class BossRun : StateMachineBehaviour
     Rigidbody2D rb;
     BossFight boss;
 
+  
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -48,5 +50,8 @@ public class BossRun : StateMachineBehaviour
     {
         Destroy(Instantiate(_bossLaserBullet, _bossLaserPos.position, Quaternion.identity), 4);
     }
+
+  
+
 }
 
