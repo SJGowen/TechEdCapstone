@@ -3400,6 +3400,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8805fa3dcb5b174da5272bef607bf82, type: 3}
+--- !u!1 &525153151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3599327270365831748, guid: d8805fa3dcb5b174da5272bef607bf82, type: 3}
+  m_PrefabInstance: {fileID: 525153150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &537267344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6825468606339352126, guid: 76be5df807cb44bbdb52a46dc205aab2, type: 3}
@@ -9294,6 +9299,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: SoundMenuCanvas
+      value: 
+      objectReference: {fileID: 525153151}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

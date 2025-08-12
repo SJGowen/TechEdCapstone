@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
 
     [Header("Audio Settings:")]
+    [SerializeField] private GameObject SoundMenuCanvas;
     [SerializeField] private AudioClip[] audioClips;
     [Space(5)]
 
@@ -178,10 +180,27 @@ public class PlayerController : MonoBehaviour
         yAxis = Input.GetAxisRaw("Vertical");
         attack = Input.GetButtonDown("Attack");
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleSoundMenu();
+        }
+
         // Simulate taking damage for testing purposes
         if (Input.GetKeyDown(KeyCode.L))
         {
             TakeDamage(1);
+        }
+    }
+
+    private void ToggleSoundMenu()
+    {
+        if (SoundMenuCanvas != null)
+        {
+            SoundMenuCanvas.SetActive(!SoundMenuCanvas.activeSelf);
+        }
+        else
+        {
+            Debug.LogWarning("SoundMenuCanvas is not assigned in the PlayerController script.");
         }
     }
 
