@@ -7151,6 +7151,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6192507617846803415, guid: f3a65def56b914f7c88dfa7b0c91b252, type: 3}
+      propertyPath: _robotNoise
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7133389543498717546, guid: f3a65def56b914f7c88dfa7b0c91b252, type: 3}
       propertyPath: m_Name
       value: Droid
@@ -9293,6 +9297,10 @@ PrefabInstance:
     - target: {fileID: 4478109738104294568, guid: 074279f282d7f774089a1b43026f040a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088532150865864111, guid: 074279f282d7f774089a1b43026f040a, type: 3}
+      propertyPath: attackableLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
