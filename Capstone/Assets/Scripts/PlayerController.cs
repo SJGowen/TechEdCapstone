@@ -301,7 +301,14 @@ public class PlayerController : MonoBehaviour
 
     bool Hit(Transform attackTransform, Vector2 attackArea, Vector2 recoilDir, float recoilStrength)
     {
+        //Debug.Log($"attackableLayer value: {attackableLayer.value}");
+        //foreach (var col in FindObjectsByType<Collider2D>(FindObjectsSortMode.None))
+        //{
+        //    Debug.Log($"Collider {col.name} on layer {col.gameObject.layer}");
+        //}
+        
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(attackTransform.position, attackArea, 0f, attackableLayer);
+        //Debug.Log($"objectsToHit contains {objectsToHit.Length} items.");
         List<EnemyAI> hitEnemies = new List<EnemyAI>();
 
         foreach (Collider2D collider in objectsToHit)
